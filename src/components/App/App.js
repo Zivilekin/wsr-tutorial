@@ -1,6 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withTranslation } from '@wix/wix-i18n-config';
 import {
   Page,
   Checkbox,
@@ -18,10 +16,6 @@ import {
 } from 'wix-style-react';
 
 class App extends React.Component {
-  static propTypes = {
-    t: PropTypes.func,
-  };
-
   colorOptions = [
     { id: 0, value: 'Red' },
     { id: 1, value: 'Blue' },
@@ -56,7 +50,9 @@ class App extends React.Component {
               <Text>Name:</Text>
             </Col>
             <Col span={6}>
-              <Text>{this.state.submittedData.name}</Text>
+              <Text dataHook="submitted-name-title">
+                {this.state.submittedData.name}
+              </Text>
             </Col>
           </Row>
           <Row>
@@ -82,6 +78,7 @@ class App extends React.Component {
 
   renderSubmitButton = () => (
     <Button
+      dataHook="submit-button"
       disabled={!this.isSubmitEnabled()}
       onClick={() =>
         this.setState({
@@ -102,6 +99,7 @@ class App extends React.Component {
 
   renderClearButton = () => (
     <Button
+      dataHook="clear-button"
       priority="secondary"
       onClick={() =>
         this.setState({
@@ -145,6 +143,7 @@ class App extends React.Component {
                         <Col span={6}>
                           <FormField label="Name" required>
                             <Input
+                              dataHook="name-input"
                               placeholder="Enter a name"
                               value={this.state.name}
                               onChange={(e) =>
@@ -158,6 +157,7 @@ class App extends React.Component {
                         <Col span={6}>
                           <FormField label="Favorite color">
                             <Dropdown
+                              dataHook="color-input"
                               placeholder="Enter a color"
                               selectedId={this.state.favoriteColorId}
                               onSelect={({ id }) =>
@@ -172,6 +172,7 @@ class App extends React.Component {
                         <Col span={6}>
                           <FormField>
                             <Checkbox
+                              dataHook="terms-checkbox"
                               checked={this.state.termsChecked}
                               onChange={() =>
                                 this.setState({
@@ -203,6 +204,7 @@ class App extends React.Component {
                       <Card.Content>
                         <FormField label="Fun fact">
                           <InputArea
+                            dataHook="fun-fact-input"
                             placeholder="Enter something interesting"
                             value={this.state.funFact}
                             onChange={(e) =>
@@ -224,4 +226,4 @@ class App extends React.Component {
   }
 }
 
-export default withTranslation()(App);
+export default App;
